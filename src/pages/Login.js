@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   constructor() {
@@ -13,6 +14,23 @@ class Login extends Component {
   onInputChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
+    this.enableBtn();
+  }
+
+  enableBtn = () => {
+    const { email, password } = this.state;
+    // const VALID_EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // https://www.codegrepper.com/code-examples/javascript/javascript+regex+email+validation
+    const VALID_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // https://ui.dev/validate-email-address-javascript
+    const MIN_LENGTH = 5;
+    if (email.match(VALID_EMAIL_REGEX) && password.length >= MIN_LENGTH) {
+      this.setState({ isDisabled: false });
+    }
+  }
+
+  btnLogin = () => {
+    const { history } = this.props;
+
+    history.push('/carteira');
   }
 
   render() {
@@ -38,6 +56,7 @@ class Login extends Component {
         <button
           type="button"
           disabled={ isDisabled }
+          onClick={ this.btnLogin }
         >
           Entrar
         </button>
@@ -47,3 +66,9 @@ class Login extends Component {
 }
 
 export default Login;
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
