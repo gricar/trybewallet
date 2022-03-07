@@ -81,7 +81,13 @@ class FormAddExpense extends React.Component {
           >
             {
               currenciesCode.map((code, index) => (
-                <option key={ index } value={ code }>{ code }</option>
+                <option
+                  key={ index }
+                  value={ code }
+                  data-testid={ code }
+                >
+                  { code }
+                </option>
               ))
             }
           </select>
