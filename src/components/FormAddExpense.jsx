@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addExpense, fetchQuotations } from '../actions';
+import { fetchQuotations } from '../actions';
 
-const chooseOption = 'Selecione uma opção';
+const alimentacao = 'Alimentação';
 
 const RESET_STATE = {
   description: '',
   price: 0,
   currency: 'USD',
-  payment: chooseOption,
-  category: chooseOption,
+  payment: 'Dinheiro',
+  category: alimentacao,
 };
 
 class FormAddExpense extends React.Component {
@@ -19,9 +19,14 @@ class FormAddExpense extends React.Component {
     description: '',
     price: 0,
     currency: 'USD',
-    payment: chooseOption,
-    category: chooseOption,
+    payment: 'Dinheiro',
+    category: alimentacao,
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchQuotations());
+  }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
@@ -32,10 +37,8 @@ class FormAddExpense extends React.Component {
       id: prevState.id + 1,
     }));
 
-    const itemDetails = this.state;
     const { dispatch } = this.props;
-    dispatch(addExpense(null, itemDetails));
-    dispatch(fetchQuotations());
+    dispatch(fetchQuotations(this.state));
 
     this.resetFormInputs();
   };
@@ -44,6 +47,10 @@ class FormAddExpense extends React.Component {
 
   render() {
     const { description, price, currency, payment, category } = this.state;
+    // const { currencies } = this.props;
+    // const simbols = currencies.filter((coin) => coin !== 'USD');
+    // console.log('simbols', simbols);
+
     return (
       <form>
         <label htmlFor="description">
@@ -87,7 +94,6 @@ class FormAddExpense extends React.Component {
             value={ payment }
             onChange={ this.handleChange }
           >
-            <option selected disabled>{ chooseOption }</option>
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
             <option value="Cartão de débito">Cartão de débito</option>
@@ -101,7 +107,6 @@ class FormAddExpense extends React.Component {
             value={ category }
             onChange={ this.handleChange }
           >
-            <option selected disabled>{ chooseOption }</option>
             <option value="Alimentação">Alimentação</option>
             <option value="Lazer">Lazer</option>
             <option value="Trabalho">Trabalho</option>
@@ -120,7 +125,11 @@ class FormAddExpense extends React.Component {
   }
 }
 
-export default connect()(FormAddExpense);
+const mapStateToProps = ({ wallet: { currencies } }) => ({
+  currencies,
+});
+
+export default connect(mapStateToProps)(FormAddExpense);
 
 FormAddExpense.propTypes = {
   dispatch: PropTypes.func.isRequired,

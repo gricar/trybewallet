@@ -1,9 +1,7 @@
 // Actions Types
 export const LOGIN = 'LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
-
-// export const REQUEST_COINS_QUOTATIONS = 'REQUEST_COINS_QUOTATIONS';
-export const GET_COINS_QUOTATIONS = 'GET_COINS_QUOTATIONS';
+export const GET_CURRENCIES_QUOTATIONS = 'GET_CURRENCIES_QUOTATIONS';
 
 // Actions Creators
 export const login = (value) => ({
@@ -11,25 +9,29 @@ export const login = (value) => ({
   value,
 });
 
-export const addExpense = (currencies, itemAdded) => ({
+const addExpense = (exchangeRates, itemAdded) => ({
   type: ADD_EXPENSE,
-  currencies,
-  expenses: itemAdded,
+  expenses: {
+    ...itemAdded, exchangeRates,
+  },
 });
 
-export const getCoinsQuotations = (data) => ({
-  type: GET_COINS_QUOTATIONS,
-  data,
+const getCurrenciesQuotations = (exchangeRates) => ({
+  type: GET_CURRENCIES_QUOTATIONS,
+  currencies: exchangeRates,
 });
 
-export function fetchQuotations() {
+export function fetchQuotations(itemAdded) {
   return async (dispatch) => {
     try {
-      // dispatch(requestAPI());
       const URL = 'https://economia.awesomeapi.com.br/json/all';
       const response = await fetch(URL);
-      const data = await response.json();
-      dispatch(getCoinsQuotations(data));
+      const exchangeRates = await response.json();
+      if (!itemAdded) {
+        dispatch(getCurrenciesQuotations(exchangeRates));
+      } else {
+        dispatch(addExpense(exchangeRates, itemAdded));
+      }
     } catch (error) {
       console.error(error);
     }

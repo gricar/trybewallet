@@ -5,8 +5,12 @@ import './header.css';
 
 class Header extends React.Component {
   render() {
-    const { email } = this.props;
-    const totalExpenses = 0;
+    const { email, expenses } = this.props;
+    const totalExpenses = expenses
+      .reduce((acc, { price, exchangeRates }) => {
+        const itemPriceInReal = Number(price * exchangeRates.USD.ask);
+        return acc + itemPriceInReal;
+      }, 0);
     const currency = 'BRL';
     return (
       <header>
@@ -26,12 +30,16 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user: { email } }) => ({
+const mapStateToProps = ({ user: { email }, wallet: { expenses } }) => ({
   email,
+  expenses,
 });
 
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.shape({
+    reduce: PropTypes.func,
+  }).isRequired,
 };
