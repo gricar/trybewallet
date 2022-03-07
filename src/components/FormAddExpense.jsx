@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addExpense } from '../actions';
+import { addExpense, fetchQuotations } from '../actions';
 
 const chooseOption = 'Selecione uma opção';
 
@@ -31,9 +31,12 @@ class FormAddExpense extends React.Component {
     this.setState((prevState) => ({
       id: prevState.id + 1,
     }));
+
     const itemDetails = this.state;
     const { dispatch } = this.props;
     dispatch(addExpense(null, itemDetails));
+    dispatch(fetchQuotations());
+
     this.resetFormInputs();
   };
 
