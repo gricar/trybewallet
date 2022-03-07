@@ -8,7 +8,7 @@ const alimentacao = 'Alimentação';
 const RESET_STATE = {
   description: '',
   price: 0,
-  currency: 'USD',
+  currency: '',
   payment: 'Dinheiro',
   category: alimentacao,
 };
@@ -18,7 +18,7 @@ class FormAddExpense extends React.Component {
     id: 0,
     description: '',
     price: 0,
-    currency: 'USD',
+    currency: '',
     payment: 'Dinheiro',
     category: alimentacao,
   };
@@ -47,10 +47,8 @@ class FormAddExpense extends React.Component {
 
   render() {
     const { description, price, currency, payment, category } = this.state;
-    // const { currencies } = this.props;
-    // const simbols = currencies.filter((coin) => coin !== 'USD');
-    // console.log('simbols', simbols);
-
+    const { currencies } = this.props;
+    const currenciesCode = Object.keys(currencies).filter((code) => code !== 'USDT');
     return (
       <form>
         <label htmlFor="description">
@@ -81,9 +79,11 @@ class FormAddExpense extends React.Component {
             value={ currency }
             onChange={ this.handleChange }
           >
-            <option value="USD">USD</option>
-            <option value="BRL">BRL</option>
-            <option value="EUR">EUR</option>
+            {
+              currenciesCode.map((code, index) => (
+                <option key={ index } value={ code }>{ code }</option>
+              ))
+            }
           </select>
         </label>
         <label htmlFor="payment">
