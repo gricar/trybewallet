@@ -139,4 +139,7 @@ export default connect(mapStateToProps)(FormAddExpense);
 
 FormAddExpense.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  currencies: PropTypes.objectOf(
+    PropTypes.objectOf(PropTypes.string),
+  ).isRequired,
 };
