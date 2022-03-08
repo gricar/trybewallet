@@ -1,4 +1,6 @@
-import { ADD_EXPENSE, REQUEST_CURRENCIES, GET_CURRENCIES_QUOTATIONS } from '../actions';
+import {
+  ADD_EXPENSE, REMOVE_EXPENSE, REQUEST_CURRENCIES, GET_CURRENCIES_QUOTATIONS,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: {},
@@ -12,6 +14,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.expenses],
+      isFetching: false,
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter(({ id }) => id !== action.expenseItemId),
       isFetching: false,
     };
   case REQUEST_CURRENCIES:
