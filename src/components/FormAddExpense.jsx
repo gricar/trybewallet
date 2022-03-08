@@ -7,20 +7,20 @@ const alimentacao = 'Alimentação';
 
 const RESET_STATE = {
   description: '',
-  price: 0,
-  currency: '',
-  payment: 'Dinheiro',
-  category: alimentacao,
+  value: 0,
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: alimentacao,
 };
 
 class FormAddExpense extends React.Component {
   state = {
     id: 0,
     description: '',
-    price: 0,
-    currency: '',
-    payment: 'Dinheiro',
-    category: alimentacao,
+    value: 0,
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: alimentacao,
   };
 
   componentDidMount() {
@@ -46,7 +46,7 @@ class FormAddExpense extends React.Component {
   resetFormInputs = () => this.setState(RESET_STATE);
 
   render() {
-    const { description, price, currency, payment, category } = this.state;
+    const { description, value, currency, method, tag } = this.state;
     const { currencies } = this.props;
     const currenciesCode = Object.keys(currencies).filter((code) => code !== 'USDT');
     return (
@@ -61,13 +61,13 @@ class FormAddExpense extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
-        <label htmlFor="price">
+        <label htmlFor="value">
           Valor:
           <input
             type="number"
-            name="price"
+            name="value"
             data-testid="value-input"
-            value={ price }
+            value={ value }
             onChange={ this.handleChange }
           />
         </label>
@@ -76,6 +76,7 @@ class FormAddExpense extends React.Component {
           <select
             data-testid="currency-input"
             name="currency"
+            id="currency"
             value={ currency }
             onChange={ this.handleChange }
           >
@@ -92,12 +93,13 @@ class FormAddExpense extends React.Component {
             }
           </select>
         </label>
-        <label htmlFor="payment">
+        <label htmlFor="method">
           Método de pagamento:
           <select
             data-testid="method-input"
-            name="payment"
-            value={ payment }
+            name="method"
+            id="method"
+            value={ method }
             onChange={ this.handleChange }
           >
             <option value="Dinheiro">Dinheiro</option>
@@ -105,12 +107,13 @@ class FormAddExpense extends React.Component {
             <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
-        <label htmlFor="category">
+        <label htmlFor="tag">
           Categoria:
           <select
             data-testid="tag-input"
-            name="category"
-            value={ category }
+            name="tag"
+            id="tag"
+            value={ tag }
             onChange={ this.handleChange }
           >
             <option value="Alimentação">Alimentação</option>

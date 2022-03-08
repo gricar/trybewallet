@@ -1,6 +1,7 @@
 // Actions Types
 export const LOGIN = 'LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const GET_CURRENCIES_QUOTATIONS = 'GET_CURRENCIES_QUOTATIONS';
 
 // Actions Creators
@@ -16,6 +17,10 @@ const addExpense = (exchangeRates, itemAdded) => ({
   },
 });
 
+const requestCurrencies = () => ({
+  type: REQUEST_CURRENCIES,
+});
+
 const getCurrenciesQuotations = (exchangeRates) => ({
   type: GET_CURRENCIES_QUOTATIONS,
   currencies: exchangeRates,
@@ -24,6 +29,7 @@ const getCurrenciesQuotations = (exchangeRates) => ({
 export function fetchQuotations(itemAdded) {
   return async (dispatch) => {
     try {
+      dispatch(requestCurrencies());
       const URL = 'https://economia.awesomeapi.com.br/json/all';
       const response = await fetch(URL);
       const exchangeRates = await response.json();
