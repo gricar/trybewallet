@@ -3,37 +3,38 @@ import React from 'react';
 class ExpensesHeader extends React.Component {
   render() {
     return (
-      <header>
-        <ul>
-          <li>
+      <table>
+        <caption>Expenses Table</caption>
+        <tr>
+          <th>
             Descrição
-          </li>
-          <li>
+          </th>
+          <th>
             Tag
-          </li>
-          <li>
+          </th>
+          <th>
             Método de pagamento
-          </li>
-          <li>
+          </th>
+          <th>
             Valor
-          </li>
-          <li>
+          </th>
+          <th>
             Moeda
-          </li>
-          <li>
+          </th>
+          <th>
             Câmbio utilizado
-          </li>
-          <li>
+          </th>
+          <th>
             Valor convertido
-          </li>
-          <li>
+          </th>
+          <th>
             Moeda de conversão
-          </li>
-          <li>
+          </th>
+          <th>
             Editar/Excluir
-          </li>
-        </ul>
-      </header>
+          </th>
+        </tr>
+      </table>
     );
   }
 }
