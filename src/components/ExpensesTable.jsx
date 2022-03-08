@@ -6,7 +6,6 @@ import './expensesTable.css';
 class ExpensesTable extends React.Component {
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
     return (
       <table className="expensesTable">
         <caption>Expenses Table</caption>
@@ -47,7 +46,7 @@ class ExpensesTable extends React.Component {
               const {
                 currency, description, value, method, tag, id, exchangeRates,
               } = expense;
-              const cambio = parseFloat(exchangeRates[currency].ask).toFixed(2);
+              const cambio = parseFloat(exchangeRates[currency].ask);
               return (
                 <tr key={ id }>
                   <td>{description}</td>
@@ -55,8 +54,8 @@ class ExpensesTable extends React.Component {
                   <td>{method}</td>
                   <td>{parseFloat(value).toFixed(2)}</td>
                   <td>{exchangeRates[currency].name}</td>
-                  <td>{cambio}</td>
-                  <td>{value * cambio}</td>
+                  <td>{cambio.toFixed(2)}</td>
+                  <td>{parseFloat(value * cambio).toFixed(2)}</td>
                   <td>Real</td>
                 </tr>
               );
