@@ -7,10 +7,8 @@ class Header extends React.Component {
   render() {
     const { email, expenses } = this.props;
     const totalExpenses = expenses
-      .reduce((acc, itemAdded) => {
-        const { value, exchangeRates } = itemAdded;
-        const coinItem = itemAdded.currency;
-        const itemPriceInReal = Number(value * exchangeRates[coinItem].ask);
+      .reduce((acc, { currency, exchangeRates, value }) => {
+        const itemPriceInReal = Number(value * exchangeRates[currency].ask);
         return acc + itemPriceInReal;
       }, 0);
     const currency = 'BRL';

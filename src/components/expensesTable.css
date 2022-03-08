@@ -1,0 +1,15 @@
+.expensesTable {
+  margin: 20px auto;
+  padding: 10px;
+  width: 90%;
+}
+
+.expensesTable th {
+  background-color: #04aa6d;
+  border: 1px solid #ddd;
+  color: white;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  text-align: center;
+  width: 100px;
+}
