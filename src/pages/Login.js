@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { login } from '../actions';
+import './login.css';
 
 class Login extends Component {
   state = {
@@ -26,12 +27,14 @@ class Login extends Component {
     const MIN_LENGTH = 5;
     const { email, password } = this.state;
     return (
-      <form>
+      <form className="loginForm">
+        <h4>Área de Login</h4>
         <input
           type="email"
           name="email"
           placeholder="E-mail"
           data-testid="email-input"
+          className="loginFromInputs"
           value={ email }
           onChange={ this.onInputChange }
         />
@@ -40,11 +43,13 @@ class Login extends Component {
           name="password"
           placeholder="Password"
           data-testid="password-input"
+          className="loginFromInputs"
           value={ password }
           onChange={ this.onInputChange }
         />
         <button
           type="button"
+          className="loginBtn"
           disabled={ !email.match(VALID_EMAIL_REGEX) || password.length <= MIN_LENGTH }
           onClick={ this.btnLogin }
         >
