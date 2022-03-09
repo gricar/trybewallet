@@ -59,7 +59,7 @@ class ExpensesTable extends React.Component {
                   <td>{tag}</td>
                   <td>{method}</td>
                   <td>{parseFloat(value).toFixed(2)}</td>
-                  <td>{exchangeRates[currency].name}</td>
+                  <td>{exchangeRates[currency].name.split('/')[0]}</td>
                   <td>{cambio.toFixed(2)}</td>
                   <td>{parseFloat(value * cambio).toFixed(2)}</td>
                   <td>Real</td>
@@ -89,6 +89,6 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
 export default connect(mapStateToProps)(ExpensesTable);
 
 ExpensesTable.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.number).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
