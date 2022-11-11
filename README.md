@@ -1,10 +1,18 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+<h2 align="center">Welcome to TrybeWallet Project 💸🏦 </h2>
+
+### Description
+To develop a real-time currency converter spending control wallet. This application allows the user to:
+
+- Add, remove and edit an expense;
+
+- View a tables with your expenses;
+
+- View total spend converted to a currency of choice;
+
+<!-- > [Resultado final](url) -->
+
+### Skills:
+
+1. Create a `Redux store` (`reducers`, `actions`, `dispatchers`) in **React** applications
+2. `Connect` Redux to React components
+3. Create `asynchronous actions` in your React application that makes use of Redux.
